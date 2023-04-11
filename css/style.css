@@ -1,0 +1,16 @@
+/* 
+            Clases del conenedor 
+*/
+
+
+.container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#canvas{
+    border: 3px solid rgb(138, 138, 138);
+    padding: 2px;
+}
