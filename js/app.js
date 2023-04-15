@@ -33,7 +33,9 @@ function main() {
 //////////////////////////// Create Figures
 function createFigures() {
 
-     for (let index = 0; index < LIMIT; index++) {
+
+    
+    for (let index = 0; index < LIMIT; index++) {
 
         if((index % 2) == 0){
             let l1 = Math.floor(Math.random() * (MAX_ZISE - MIN_ZISE + 1) + MIN_ZISE);
@@ -65,16 +67,23 @@ function drawAllImages() {
 //////////////////////////// add drag & drop functionality
 function selectFigure(){
     canvas.addEventListener('mousedown', function (e) { // escucha clic down
+        
         let index = LIMIT-1;
         let selected = false;
         while(index >= 0 && !selected){ // check si el click se hizo sobre una figura
+           
             const figura = figuras[index];
             // verifica que el click se hizo dentro de la figura
             let clic = {x: (e).offsetX, y: (e).offsetY}
             if (figura.estaElPunto(clic["x"], clic["y"])){
-                let actPos = figura.getPos();
-                deltaPos = {x:(clic['x']-actPos['x']), y:(clic['y']-actPos['y'])};
-                figura.selected(true); 
+              
+                // la figura seleccionada pasa al frente (desde el punto de vista del array, al final)
+                const aux = figuras[index];
+                let actPos = aux.getPos();
+                deltaPos = {x:(clic['x']-actPos['x']), y:(clic['y']-actPos['y'])}; // obtenemos el diferencial entre el pto de ubicacion de la figura y el clock del mouse
+                aux.selected(true); 
+                figuras.splice(index, 1);
+                figuras.push(aux);
                 // agrega una escucha para el movimiento
                 canvas.addEventListener('mousemove', dragFigure);
                 selected = true;
@@ -92,7 +101,6 @@ function dropFigure() {
             if(figura.isSelected()){
                 canvas.removeEventListener('mousemove', dragFigure);
                 figura.selected(false);
-                // console.log(figuras);
             }
         }
     });
@@ -110,14 +118,4 @@ function dragFigure(e) {
     // redibujamos el lienzo
     drawAllImages();
 
-}
-
-
-// get position relative on canvas
-function getMousePos(evt) {
-  var rect = canvas.getBoundingClientRect();
-  return {
-    x: evt.clientX - rect.left,
-    y: evt.clientY - rect.top
-  };
 }
