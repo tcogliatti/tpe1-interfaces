@@ -7,7 +7,7 @@ let ctx = canvas.getContext('2d');
 
 ////////////////////////////// Setup
                             //
-const LIMIT = 6;            // cant de figuras
+const LIMIT = 16;            // cant de figuras
 const MIN_ZISE = 100;       // tamaño minimo de la fig
 const MAX_ZISE = 150;       // tamaño maximo
 let deltaPos;               // variable global de distancia entre puntos
