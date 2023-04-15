@@ -4,9 +4,9 @@
 
 class Cicrulo extends Figura
 {
-    constructor(posX, posY, rad, ctx, slctd)
+    constructor(posX, posY, rad, ctx, clic)
     {
-        super(posX, posY, ctx, slctd);
+        super(posX, posY, ctx, clic);
         this.r = rad;
     }
 
@@ -20,7 +20,7 @@ class Cicrulo extends Figura
     estaElPunto(mX, mY){
         let c1 = Math.abs( mX - this.posX );
         let c2 = Math.abs( mY - this.posY );
-        let gap = Math.sqrt( Math.pow(c1, 2) + Math.pow(c1, 2) );
+        let gap = Math.sqrt( Math.pow(c1, 2) + Math.pow(c2, 2) );
         if(gap <= this.r)
             return true
         return false; 

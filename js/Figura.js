@@ -4,41 +4,44 @@
 
 class Figura 
 {
-    constructor(posX, posY, ctx, selected)
-    {
+    constructor(posX, posY, ctx) {
         this.posX = posX;
         this.posY = posY;
         this.ctx = ctx;
-        this.slctd = selected;
-        this.fill();
+        this.clicked = false;
+        this.style = this.randomRGBA();
     }
 
-    draw()
-    {
+    draw() {
         // nothing to do - abstract method
     }
 
-    moveTo(posX, posY)
-    {
+    moveTo(posX, posY) {
         this.posX = posX;
         this.posY = posY;
     }
 
-    selected(selected)
-    {
-        this.slctd = selected;
+    getPos() {
+        return {x: this.posX, y: this.posY};
     }
 
-    estaElPunto(mX, mY){
-        
+    selected(clic) {
+        this.clicked = clic;
+    }
+
+    isSelected() {
+        return this.clicked;
+    }
+
+    estaElPunto(mX, mY) {
+
         // nothing to do - abstract method
 
         return null; 
     }
 
-    fill()
-    {
-        ctx.fillStyle = this.randomRGBA(50, 150);
+    fill() {
+        ctx.fillStyle = this.style;
         ctx.fill();
     }
 
